@@ -10,7 +10,7 @@ class Country(models.Model):
 
 class City(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    city_name = models.CharField(max_length=100)
+    city_name = models.CharField(max_length=100, default="New Delhi")
     
     def __str__(self):
         return self.city_name
@@ -28,5 +28,3 @@ class Student(models.Model):
         
     def __str__(self):
         return self.first_name
-
-

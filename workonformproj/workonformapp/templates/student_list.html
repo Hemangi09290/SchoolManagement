@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Student List Module {% endblock %}
+{% block content %}
+    <h2>Student Management</h2>
+    <p>
+        <a href="{% url 'student_add' %}">Add Student</a>
+    </p>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Roll Number</th>
+            <th>Password</th>
+            
+            <th>Birthday</th>
+            <th>EmailID</th>
+            <th>Country</th>
+            <th>City</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+                <tr>
+                    <td><a href="{% url 'student_change' student.pk %}">{{ student.first_name }}</a></td>
+                    <td>{{ student.last_name }}</td>
+                    <td>{{ student.roll_number }}</td>
+                    <td>{{ student.password }}</td>
+                    
+                    <td>{{ student.DOB }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.country.country_name }}</td>
+                    <td>{{ student.city.city_name }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8">No Student in the database <a href="{% url 'student_add' %}">Add First Student</a> </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

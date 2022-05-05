@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Student Form</h2>
+    <form method="post" id="StudentForm" data-cities-url="{% url 'load_cities' %}">
+        {% csrf_token %}
+        <table>
+            {{ students.as_table }}
+        </table>
+        <button type="submit">Save</button>
+        <a href="{% url 'student_change_list' %}">Nevermind</a>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+   
+{% endblock %}

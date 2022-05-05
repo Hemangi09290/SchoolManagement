@@ -1,6 +1,6 @@
 # import the standard Django Forms
-from dataclasses import fields
-from pyexpat import model
+#from dataclasses import fields
+#from pyexpat import model
 from django import forms
 from .models import Student, Country, City
 
@@ -17,11 +17,11 @@ class InputForm(forms.Form):
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ('first_name', 'last_name', 'roll_number', 'password', 'picture', 'DOB', 'email', 'country', 'city')
+        fields = ('first_name', 'last_name', 'roll_number', 'password', 'DOB', 'email', 'country', 'city')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['city'].queryset = City.objects.none()
+        #self.fields['city'].queryset = City.objects.none()
 
         if 'country' in self.data:
             try:
@@ -31,4 +31,6 @@ class StudentForm(forms.ModelForm):
                 pass
         elif self.instance.pk:
             self.fields['city'].queryset = self.instance.country.city_set
+        else:
+            self.fields['city'].queryset = City.objects.all()
 
